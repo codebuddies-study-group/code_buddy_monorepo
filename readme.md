@@ -73,3 +73,30 @@ in some frameworks, others has no previous contact with other framework. The ide
 [caioabreu96@gmail.com](mailto:caioabreu96@gmail.com)
 
 [lucabaronpietro@gmail.com](mailto:lucabaronpietro@gmail.com)
+
+# Local Installation
+
+## Backend
+
+Go to [backend readme](backend/readme.md)
+
+## Useful commands
+
+* Up docker
+```
+make up
+```
+
+* Down docker
+```
+make down
+```
+
+* reset database
+```
+# remember to stop the containers
+
+make clear-database
+
+# turn on the dockers again
+```
