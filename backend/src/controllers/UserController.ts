@@ -9,9 +9,7 @@ import User from "../models/UserModel";
  */
 export async function create(req: Request, res: Response) {
     // WIP
-    const new_user = User.build({name: 'Luiz', email: 'luizhenriquefbb@gmail.com'});
-
-    await new_user.save()
+    const new_user = User.create({id: 1, name: 'Luiz', email: 'luizhenriquefbb@gmail.com'});
 
     return res.json(new_user);
 }

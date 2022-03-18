@@ -18,7 +18,10 @@ const user = database.define('User', {
     },
 },
     {
-        tableName: 'user'
+        tableName: 'user',
+        createdAt: false,
+        updatedAt: false,
+        deletedAt: false,
     }
 );
 
