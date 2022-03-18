@@ -3,7 +3,7 @@
 install dependencies
 ```sh
 cd backend
-yarn
+yarn # or npm install
 ```
 
 Create tsconfig
@@ -14,11 +14,18 @@ npx tsc --init
 ## How to run
 
 
-```
+```sh
 # in watch mode
-yarn dev
+yarn dev # or npm run dev
 
 
 # not in watch mode
-yarn execute
+yarn execute # or npm run execute
 ```
+
+# Technologies and frameworks
+
+* express
+* Typescript
+* sequelize (ORM)
+* postgres

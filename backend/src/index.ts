@@ -1,10 +1,10 @@
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 import http from 'http';
-
-import routes from './routes';
 import { PORT } from './constants';
+import routes from './routes';
 
+import './database';
 
 // create a server
 const app = express();
@@ -20,5 +20,7 @@ app.use(express.json());
 // import routes
 app.use(routes);
 
+const port = process.env.PORT || PORT
 
+console.log(`Listening to ${port}`);
 server.listen(process.env.PORT || PORT);

@@ -38,7 +38,8 @@ in some frameworks, others has no previous contact with other framework. The ide
 ## Extra
 
 * Integration with google calendar
-* Semantic commit
+* [Semantic commit](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
+    * why not with [emoji](https://gist.github.com/parmentf/035de27d6ed1dce0b36a) too
 
 # About the project
 
