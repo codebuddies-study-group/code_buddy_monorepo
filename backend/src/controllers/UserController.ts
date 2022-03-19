@@ -8,8 +8,11 @@ import User from "../models/UserModel";
  * @param {Response} res
  */
 export async function create(req: Request, res: Response) {
-    // WIP
-    const new_user = User.create({id: 1, name: 'Luiz', email: 'luizhenriquefbb@gmail.com'});
-
-    return res.json(new_user);
+    const {name, email, password} = req.body
+    try {
+        const new_user = User.create({name, email, password});
+        return res.json(new_user);
+    } catch (error) {
+        console.error(error);
+    }
 }

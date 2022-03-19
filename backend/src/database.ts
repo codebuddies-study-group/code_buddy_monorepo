@@ -1,6 +1,6 @@
 
 import { POSTGRESS_PASSWORD, POSTGRESS_USERNAME } from "./constants";
-import { Sequelize } from 'sequelize-typescript';
+import { Sequelize } from 'sequelize';
 
 
 console.log('Connecting to database');

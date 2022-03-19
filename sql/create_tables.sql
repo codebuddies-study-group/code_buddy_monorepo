@@ -1,8 +1,12 @@
-CREATE TABLE IF NOT EXISTS public.user (
-    id INT NOT NULL,
-    name varchar(250) NOT NULL,
-    email varchar(250) NOT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE public."user" (
+    id int4 NOT NULL,
+    name varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    password varchar(255) NOT NULL,
+    "createdAt" timestamptz NOT NULL,
+    "updatedAt" timestamptz NOT NULL,
+    "deletedAt" timestamptz NULL,
+    CONSTRAINT user_pkey PRIMARY KEY (id)
 );
 
 

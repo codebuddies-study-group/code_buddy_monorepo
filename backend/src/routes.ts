@@ -1,5 +1,6 @@
 import express from "express";
 import * as UserController from './controllers/UserController'
+import { celebrate, Joi } from "celebrate";
 
 const routes = express.Router();
 
@@ -19,8 +20,20 @@ routes.post('/hello_world', (req, res) => res.json({
     params: req.params,
 }));
 
-routes.get(
+routes.post(
     '/createUser',
+    celebrate(
+        {
+            body: Joi.object().keys({
+                name: Joi.string().required(),
+                email: Joi.string().required().email(),
+                password: Joi.string().required(),
+            })
+        },
+        {
+            abortEarly: false,
+        }
+    ),
     UserController.create,
 )
 
