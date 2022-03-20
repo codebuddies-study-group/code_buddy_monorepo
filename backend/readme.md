@@ -24,6 +24,12 @@ Download the VSCode extensions for [ESLint](https://marketplace.visualstudio.com
   "diffEditor.ignoreTrimWhitespace": false,
 ```
 
+## Enable Husky Git hooks
+
+```sh
+yarn prepare
+```
+
 ## How to run
 
 ```
