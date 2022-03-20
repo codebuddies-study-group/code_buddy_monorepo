@@ -40,3 +40,17 @@ yarn dev
 # not in watch mode
 yarn execute
 ```
+
+# Husky
+
+## Create a Husky Git hook
+
+```sh
+npx husky add .husky/file-name "your command here"
+```
+
+## List of husky hooks
+
+| File              | Description                                   |
+| ----------------- | --------------------------------------------- |
+| .husky/pre-commit | Enforces Prettier linter fixes before commits |
