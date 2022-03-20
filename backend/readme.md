@@ -1,18 +1,30 @@
 # Installation
 
-install dependencies
+## Install dependencies
+
 ```sh
 cd backend
 yarn
 ```
 
-Create tsconfig
+## Create tsconfig
+
 ```sh
 npx tsc --init
 ```
 
-## How to run
+## Configure linting in VSCode
 
+Download the VSCode extensions for [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode). Then go to the VSCode settings (Ctrl + Shift + P > Preferences: Open Settings (JSON)) and add these options:
+
+```
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.tabSize": 2,
+  "diffEditor.ignoreTrimWhitespace": false,
+```
+
+## How to run
 
 ```
 # in watch mode
