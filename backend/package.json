@@ -25,7 +25,8 @@
   },
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --no-notify src/index.ts",
-    "execute": "ts-node src/index.ts"
+    "execute": "ts-node src/index.ts",
+    "prepare": "cd .. && husky install backend/.husky"
   },
   "dependencies": {
     "cors": "^2.8.5",
