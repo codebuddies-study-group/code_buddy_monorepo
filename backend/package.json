@@ -26,7 +26,9 @@
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --no-notify src/index.ts",
     "execute": "ts-node src/index.ts",
-    "prepare": "cd .. && husky install backend/.husky"
+    "prepare": "cd .. && husky install backend/.husky",
+    "lint-check": "prettier --check .",
+    "lint": "prettier --write ."
   },
   "dependencies": {
     "cors": "^2.8.5",
