@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import Language from "../models/interfaces/Language";
 import Meeting from "../models/interfaces/Meeting";
 import User from "../models/interfaces/User";
 
@@ -30,7 +31,14 @@ export async function show(req: Request, res: Response) {
     const userId = req.params.id
 
     try {
-        const new_user = await User.findOne({ include: Meeting, where: { id: userId } });
+        const new_user = await User.findOne(
+            {
+                include: [Meeting, Language],
+                where: {
+                    id: userId
+                }
+            }
+        );
         console.log({ new_user });
 
         return res.status(200).json(new_user);
