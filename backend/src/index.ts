@@ -10,7 +10,7 @@ import { errors } from "celebrate";
 
 db.sequelize.sync({
     // do not drop to recreate a table
-    // force: true,
+    force: false,
     // make necessaries alter table commands
     alter: true
 }).then(() => {

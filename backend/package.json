@@ -14,8 +14,7 @@
   },
   "scripts": {
     "dev": "ts-node-dev --ignore-watch node_modules --no-notify src/index.ts",
-    "execute": "ts-node src/index.ts",
-    "sync-table": "ts-node src/database/sync_tables.ts"
+    "execute": "ts-node src/index.ts"
   },
   "dependencies": {
     "@sequelize/core": "^7.0.0-alpha.10",

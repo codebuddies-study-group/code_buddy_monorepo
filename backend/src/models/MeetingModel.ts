@@ -1,11 +1,11 @@
 'use strict';
 
-import Sequelize  from '@sequelize/core';
+import Sequelize from '@sequelize/core';
 
-import User from './interfaces/User';
+import Meeting from './interfaces/Meeting';
 
 module.exports = (sequelize: any, DataTypes: any) => {
-    User.init({
+    Meeting.init({
         id: {
             type: Sequelize.INTEGER,
             autoIncrement: true,
@@ -16,13 +16,17 @@ module.exports = (sequelize: any, DataTypes: any) => {
             type: Sequelize.STRING,
             allowNull: false
         },
-        email: {
+
+        topic: {
             type: Sequelize.STRING,
             allowNull: false,
-            unique: true,
         },
-        password: {
+        url: {
             type: Sequelize.STRING,
+            allowNull: false,
+        },
+        date: {
+            type: Sequelize.DATE,
             allowNull: false,
         },
         createdAt: {
@@ -38,13 +42,13 @@ module.exports = (sequelize: any, DataTypes: any) => {
         },
     }, {
         sequelize,
-        modelName: 'User',
-        tableName: 'user',
+        modelName: 'Meeting',
+        tableName: 'meeting',
         createdAt: true,
         updatedAt: true,
         deletedAt: true,
         paranoid: true,
         omitNull: true,
     });
-    return User;
+    return Meeting;
 };

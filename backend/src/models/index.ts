@@ -13,9 +13,11 @@ const Sequelize = require('sequelize');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
-const db = {};
+type DBType = any;
 
-let sequelize;
+const db: DBType = {} as DBType;
+
+let sequelize: any;
 if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else {
@@ -24,14 +26,14 @@ if (config.use_env_variable) {
 
 fs
   .readdirSync(__dirname)
-  .filter(file => {
+  .filter((file: string) => {
     // read files that ends with ".ts"
     return (file.indexOf('.') !== 0) &&
       (file !== basename) &&
       (file.slice(-3) === '.ts') &&
-      !file.endsWith('.d.ts');
+      !file.endsWith('Model.d.ts');
   })
-  .forEach(file => {
+  .forEach((file: string) => {
     const modelConstructor = require(path.join(__dirname, file));
     if (modelConstructor instanceof Function) {
       const model = modelConstructor(sequelize, Sequelize.DataTypes);
@@ -48,4 +50,4 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default db;
