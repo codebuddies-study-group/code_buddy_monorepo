@@ -1,10 +1,11 @@
+import { Op } from "sequelize";
 import { Request, Response } from "express";
-import database from "../database";
 
-import UserLanguage from "../models/interfaces/UserLanguage";
+import database from "../database";
+import Language from "../models/interfaces/Language";
 import Meeting from "../models/interfaces/Meeting";
 import User from "../models/interfaces/User";
-import Language from "../models/interfaces/Language";
+import UserLanguage from "../models/interfaces/UserLanguage";
 
 /**
  * create items
@@ -47,9 +48,55 @@ export async function show(req: Request, res: Response) {
   }
 }
 
-export async function search(req: Request, res: Response) {}
+/**
+ * query user by substring of name and/or substring of a language the user is studying
+ * @param req
+ * @param res
+ * @returns
+ */
+export async function search(req: Request, res: Response) {
+  const { name, language } = req.query;
+
+  // if the user sent a language, we will query by it
+  const languageQuery = language
+    ? {
+        name: {
+          [Op.like]: `%${language}%`,
+        },
+      }
+    : {};
+
+  // if the user sent a name, we will query by it
+  const nameQuery = name
+    ? {
+        name: {
+          [Op.like]: `%${name}%`,
+        },
+      }
+    : {};
+
+  try {
+    const new_user = await User.findAll({
+      include: [
+        { model: Meeting },
+        {
+          model: Language,
+          where: languageQuery,
+        },
+      ],
+      where: nameQuery,
+    });
+    console.log({ new_user });
+
+    return res.status(200).json(new_user);
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 export async function edit(req: Request, res: Response) {
+  // TODO: handle invalid language id
+
   const languageIds: number[] = req.body?.languageIds;
   const name = req.body?.name;
 

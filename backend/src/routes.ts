@@ -57,6 +57,8 @@ routes.post(
 
 routes.get("/user/:id", UserController.show);
 
+routes.get("/user", UserController.search);
+
 routes.put(
   "/user/:id",
   celebrate(
