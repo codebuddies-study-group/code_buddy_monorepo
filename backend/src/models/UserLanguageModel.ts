@@ -6,7 +6,7 @@ import UserLanguage from './interfaces/UserLanguage';
 
 module.exports = (sequelize: any, DataTypes: any) => {
     UserLanguage.init({
-        user_id: {
+        UserId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
@@ -15,14 +15,14 @@ module.exports = (sequelize: any, DataTypes: any) => {
                 key: 'id'
             }
         },
-        language_id: {
+        LanguageId: {
             type: Sequelize.INTEGER,
             allowNull: false,
             primaryKey: true,
             references: {
                 model: 'Language',
                 key: 'id'
-            }
+            },
         },
     }, {
         sequelize,

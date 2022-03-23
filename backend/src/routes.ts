@@ -52,7 +52,22 @@ routes.post(
     UserController.create,
 )
 
-
 routes.get('/user/:id', UserController.show);
+
+routes.put(
+    '/user/:id',
+    celebrate(
+        {
+            body: Joi.object().keys({
+                languageIds: Joi.array().items(Joi.string()).optional(),
+                name: Joi.string().optional()
+            }),
+        },
+        {
+            abortEarly: false,
+        }
+    ),
+    UserController.edit
+);
 
 export default routes

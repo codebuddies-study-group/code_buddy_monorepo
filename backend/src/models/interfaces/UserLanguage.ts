@@ -1,18 +1,18 @@
 import { Model } from "sequelize";
 
 interface UserLanguageAttributes {
-    user_id: number;
-    language_id: number;
+    UserId: number;
+    LanguageId: number;
 }
 
-class UserMeeting extends Model<UserLanguageAttributes>
+class UserLanguage extends Model<UserLanguageAttributes>
     implements UserLanguageAttributes {
-    user_id!: number;
-    language_id!: number;
+    UserId!: number;
+    LanguageId!: number;
 
     static associate(models: any) {
 
     }
 }
 
-export default UserMeeting
+export default UserLanguage
