@@ -1,34 +1,37 @@
-'use strict';
+"use strict";
 
-import Sequelize from '@sequelize/core';
+import Sequelize from "@sequelize/core";
 
-import UserLanguage from './interfaces/UserLanguage';
+import UserLanguage from "./interfaces/UserLanguage";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-    UserLanguage.init({
-        UserId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            references: {
-                model: 'User',
-                key: 'id'
-            }
+  UserLanguage.init(
+    {
+      UserId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: "User",
+          key: "id",
         },
-        LanguageId: {
-            type: Sequelize.INTEGER,
-            allowNull: false,
-            primaryKey: true,
-            references: {
-                model: 'Language',
-                key: 'id'
-            },
+      },
+      LanguageId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        primaryKey: true,
+        references: {
+          model: "Language",
+          key: "id",
         },
-    }, {
-        sequelize,
-        modelName: 'UserLanguage',
-        tableName: 'userLanguage',
-        omitNull: true,
-    });
-    return UserLanguage;
+      },
+    },
+    {
+      sequelize,
+      modelName: "UserLanguage",
+      tableName: "userLanguage",
+      omitNull: true,
+    }
+  );
+  return UserLanguage;
 };

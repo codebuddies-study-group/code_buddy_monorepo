@@ -12,16 +12,15 @@ import Language from "../models/interfaces/Language";
  * @param {Response} res
  */
 export async function create(req: Request, res: Response) {
-    const { name, email, password } = req.body
+  const { name, email, password } = req.body;
 
-    User.create({ name, email, password })
+  User.create({ name, email, password })
     .then((user: User) => {
-        return res.status(201).json(user);
+      return res.status(201).json(user);
     })
-    .catch(reason => {
-        console.error(reason);
-        return res.status(500).json(reason)
-
+    .catch((reason) => {
+      console.error(reason);
+      return res.status(500).json(reason);
     });
 }
 
@@ -31,66 +30,68 @@ export async function create(req: Request, res: Response) {
  * @param {Response} res
  */
 export async function show(req: Request, res: Response) {
-    const userId = req.params.id
+  const userId = req.params.id;
 
-    try {
-        const new_user = await User.findOne(
-            {
-                include: [Meeting, Language],
-                where: {
-                    id: userId
-                }
-            }
-        );
-        console.log({ new_user });
+  try {
+    const new_user = await User.findOne({
+      include: [Meeting, Language],
+      where: {
+        id: userId,
+      },
+    });
+    console.log({ new_user });
 
-        return res.status(200).json(new_user);
-    } catch (error) {
-        console.error(error);
-    }
+    return res.status(200).json(new_user);
+  } catch (error) {
+    console.error(error);
+  }
 }
 
+export async function search(req: Request, res: Response) {}
+
 export async function edit(req: Request, res: Response) {
-    const languageIds:number[] = req.body?.languageIds
-    const name = req.body?.name
+  const languageIds: number[] = req.body?.languageIds;
+  const name = req.body?.name;
 
-    const userId = parseInt(req.params.id)
+  const userId = parseInt(req.params.id);
 
-    if (!name && !languageIds) {
-        return res.status(500).json({error: 'inform at least on of "name" or "languageIds"'})
+  if (!name && !languageIds) {
+    return res
+      .status(500)
+      .json({ error: 'inform at least on of "name" or "languageIds"' });
+  }
+
+  let transaction = await database.transaction();
+  try {
+    let rowsAffected: any = 0;
+
+    if (name) {
+      rowsAffected = await User.update(
+        { name },
+        { where: { id: userId }, transaction }
+      );
     }
 
-    let transaction = await database.transaction();
-    try {
+    if (languageIds) {
+      // clear previous languages
+      await UserLanguage.destroy({ where: { UserId: userId }, transaction });
 
-        let rowsAffected:any = 0
+      // insert new ones
 
-        if (name) {
-            rowsAffected = await User.update({name}, {where: {id: userId}, transaction},)
-        }
+      const bulkToCreate = languageIds.map((languageId) => {
+        return { UserId: userId, LanguageId: languageId };
+      });
 
-        if (languageIds) {
-            // clear previous languages
-            await UserLanguage.destroy({where: {UserId: userId}, transaction})
-
-            // insert new ones
-
-            const bulkToCreate = languageIds.map((languageId) => {
-                return {UserId: userId, LanguageId:languageId}
-            })
-
-            await UserLanguage.bulkCreate(bulkToCreate)
-        }
-
-        transaction.commit()
-
-        return res.status(200).json({ rowsAffected })
-
-    } catch (error) {
-        if (transaction) {
-            await transaction.rollback();
-        }
-        console.error({error});
+      await UserLanguage.bulkCreate(bulkToCreate);
     }
 
+    transaction.commit();
+
+    return res.status(200).json({ rowsAffected });
+  } catch (error) {
+    if (transaction) {
+      await transaction.rollback();
+    }
+    console.error({ error });
+  }
 }
