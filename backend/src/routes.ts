@@ -75,4 +75,6 @@ routes.put(
   UserController.edit
 );
 
+routes.delete("/user/:id", UserController.destroy);
+
 export default routes;

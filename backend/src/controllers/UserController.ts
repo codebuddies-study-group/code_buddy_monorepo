@@ -142,3 +142,12 @@ export async function edit(req: Request, res: Response) {
     console.error({ error });
   }
 }
+
+export async function destroy(req: Request, res: Response) {
+  const userId = req.params.id;
+
+
+  const response = await User.update({ deletedAt: new Date() }, { where: { id: userId } });
+
+  return res.status(200).json({ affectedCount: response })
+}
