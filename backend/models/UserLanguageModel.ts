@@ -2,7 +2,7 @@
 
 import Sequelize from "@sequelize/core";
 
-import UserLanguage from "./interfaces/UserLanguage";
+import UserLanguage from "../src/models/UserLanguage";
 
 module.exports = (sequelize: any, DataTypes: any) => {
   UserLanguage.init(

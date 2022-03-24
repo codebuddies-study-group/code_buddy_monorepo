@@ -3,7 +3,7 @@ import express from "express";
 import http from "http";
 import { PORT } from "./constants";
 import routes from "./routes";
-import db from "./models";
+import db from "../models";
 import { errors } from "celebrate";
 
 // import './database';

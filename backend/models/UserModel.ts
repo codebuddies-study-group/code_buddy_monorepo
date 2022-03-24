@@ -2,10 +2,10 @@
 
 import Sequelize from "@sequelize/core";
 
-import Language from "./interfaces/Language";
+import User from "../src/models/User";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  Language.init(
+  User.init(
     {
       id: {
         type: Sequelize.INTEGER,
@@ -14,6 +14,15 @@ module.exports = (sequelize: any, DataTypes: any) => {
         primaryKey: true,
       },
       name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
+      },
+      password: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -31,8 +40,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Language",
-      tableName: "language",
+      modelName: "User",
+      tableName: "user",
       createdAt: true,
       updatedAt: true,
       deletedAt: true,
@@ -40,5 +49,5 @@ module.exports = (sequelize: any, DataTypes: any) => {
       omitNull: true,
     }
   );
-  return Language;
+  return User;
 };

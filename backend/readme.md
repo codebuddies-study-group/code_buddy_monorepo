@@ -57,6 +57,20 @@ yarn execute # or npm run execute
 
 ## Migrations
 
+Go to src folder
+
+```sh
+cd backend/src
+```
+
+Follow the [documentation](https://sequelize.org/master/manual/migrations.html) to see how to run it
+
+### Seeds
+
+```sh
+yarn sequelize-cli db:seed:all
+```
+
 # Technologies and frameworks
 
 - express

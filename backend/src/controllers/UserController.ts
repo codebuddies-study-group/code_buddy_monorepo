@@ -2,10 +2,10 @@ import { Op } from "sequelize";
 import { Request, Response } from "express";
 
 import database from "../database";
-import Language from "../models/interfaces/Language";
-import Meeting from "../models/interfaces/Meeting";
-import User from "../models/interfaces/User";
-import UserLanguage from "../models/interfaces/UserLanguage";
+import Language from "../models/Language";
+import Meeting from "../models/Meeting";
+import User from "../models/User";
+import UserLanguage from "../models/UserLanguage";
 
 /**
  * create items

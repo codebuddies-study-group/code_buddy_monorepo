@@ -2,7 +2,7 @@
 
 import Sequelize from "@sequelize/core";
 
-import UserMeeting from "./interfaces/UserMeeting";
+import UserMeeting from "../src/models/UserMeeting";
 
 module.exports = (sequelize: any, DataTypes: any) => {
   UserMeeting.init(

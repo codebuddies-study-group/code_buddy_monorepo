@@ -2,10 +2,10 @@
 
 import Sequelize from "@sequelize/core";
 
-import Meeting from "./interfaces/Meeting";
+import Language from "../src/models/Language";
 
 module.exports = (sequelize: any, DataTypes: any) => {
-  Meeting.init(
+  Language.init(
     {
       id: {
         type: Sequelize.INTEGER,
@@ -15,19 +15,6 @@ module.exports = (sequelize: any, DataTypes: any) => {
       },
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
-      },
-
-      topic: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      url: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      date: {
-        type: Sequelize.DATE,
         allowNull: false,
       },
       createdAt: {
@@ -44,8 +31,8 @@ module.exports = (sequelize: any, DataTypes: any) => {
     },
     {
       sequelize,
-      modelName: "Meeting",
-      tableName: "meeting",
+      modelName: "Language",
+      tableName: "language",
       createdAt: true,
       updatedAt: true,
       deletedAt: true,
@@ -53,5 +40,5 @@ module.exports = (sequelize: any, DataTypes: any) => {
       omitNull: true,
     }
   );
-  return Meeting;
+  return Language;
 };
