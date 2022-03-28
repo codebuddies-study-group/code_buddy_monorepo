@@ -1,10 +1,23 @@
 # Installation
 
-## Install dependencies
+Install nvm (recommended)
+
+```sh
+TODO
+```
+
+use node 16.4.2
+
+```sh
+nvm install 16.4.2
+nvm use 16.4.2
+```
+
+install dependencies
 
 ```sh
 cd backend
-yarn
+yarn # or npm install
 ```
 
 ## Create tsconfig
@@ -20,7 +33,8 @@ Download the VSCode extensions for [ESLint](https://marketplace.visualstudio.com
 ```
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.tabSize": 2,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.tabSize": 4,
   "diffEditor.ignoreTrimWhitespace": false,
 ```
 
@@ -32,14 +46,39 @@ yarn prepare
 
 ## How to run
 
-```
+```sh
 # in watch mode
-yarn dev
+yarn dev # or npm run dev
 
 
 # not in watch mode
-yarn execute
+yarn execute # or npm run execute
 ```
+
+## Migrations
+
+Go to src folder
+
+```sh
+cd backend/src
+```
+
+Follow the [documentation](https://sequelize.org/master/manual/migrations.html) to see how to run it
+
+### Seeds
+
+```sh
+yarn sequelize-cli db:seed:all
+```
+
+# Technologies and frameworks
+
+-   express
+-   Typescript
+-   sequelize (ORM)
+    -   [documentation](https://sequelize.org/v6/index.html)
+    -   [video used to study](https://www.youtube.com/watch?v=VyEKwp6Q4fY&ab_channel=willjw3)
+-   postgres
 
 # Husky
 
