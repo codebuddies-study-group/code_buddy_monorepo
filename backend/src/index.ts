@@ -1,21 +1,38 @@
-import express from "express";
 import cors from "cors";
+import express from "express";
 import http from "http";
-
-import routes from "./routes";
 import { PORT } from "./constants";
+import routes from "./routes";
+import db from "../models";
+import { errors } from "celebrate";
 
-// create a server
-const app = express();
-const server = new http.Server(app);
+// import './database';
 
-// handle cors origin
-app.use(cors());
+db.sequelize
+  .sync({
+    // do not drop to recreate a table
+    force: false,
+    // make necessaries alter table commands
+    alter: true,
+  })
+  .then(() => {
+    // create a server
+    const app = express();
+    const server = new http.Server(app);
 
-// body must be a json
-app.use(express.json());
+    // handle cors origin
+    app.use(cors());
 
-// import routes
-app.use(routes);
+    // body must be a json
+    app.use(express.json());
 
-server.listen(process.env.PORT || PORT);
+    // import routes
+    app.use(routes);
+
+    app.use(errors());
+
+    const port = process.env.PORT || PORT;
+
+    console.log(`Listening to ${port}`);
+    server.listen(process.env.PORT || PORT);
+  });
