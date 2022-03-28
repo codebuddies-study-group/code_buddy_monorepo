@@ -20,7 +20,7 @@ cd backend
 yarn # or npm install
 ```
 
-Create tsconfig
+## Create tsconfig
 
 ```sh
 npx tsc --init
@@ -73,12 +73,12 @@ yarn sequelize-cli db:seed:all
 
 # Technologies and frameworks
 
-- express
-- Typescript
-- sequelize (ORM)
-  - [documentation](https://sequelize.org/v6/index.html)
-  - [video used to study](https://www.youtube.com/watch?v=VyEKwp6Q4fY&ab_channel=willjw3)
-- postgres
+-   express
+-   Typescript
+-   sequelize (ORM)
+    -   [documentation](https://sequelize.org/v6/index.html)
+    -   [video used to study](https://www.youtube.com/watch?v=VyEKwp6Q4fY&ab_channel=willjw3)
+-   postgres
 
 # Husky
 
