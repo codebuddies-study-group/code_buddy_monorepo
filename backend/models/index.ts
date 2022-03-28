@@ -7,9 +7,9 @@
 
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
-const Sequelize = require("sequelize");
+import fs from "fs";
+import path from "path";
+import { Sequelize, DataTypes } from "sequelize";
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || "development";
 const config = require(__dirname + "/../config/config.js")[env];
@@ -19,7 +19,7 @@ const db: DBType = {} as DBType;
 
 let sequelize: any;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize((process.env[config.use_env_variable] as string), config);
 } else {
   sequelize = new Sequelize(
     config.database,
@@ -42,7 +42,7 @@ fs.readdirSync(__dirname)
   .forEach((file: string) => {
     const modelConstructor = require(path.join(__dirname, file));
     if (modelConstructor instanceof Function) {
-      const model = modelConstructor(sequelize, Sequelize.DataTypes);
+      const model = modelConstructor(sequelize, DataTypes);
       db[model.name] = model;
     }
   });
