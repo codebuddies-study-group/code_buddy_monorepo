@@ -1,0 +1,31 @@
+{
+  "extends": ["tslint:recommended", "tslint-react"],
+  "rules": {
+    "max-line-length": {
+      "options": [120]
+    },
+    "indent": [true, "spaces", 2],
+    "no-console": {
+      "severity": "error",
+      "options": ["debug", "info", "log", "time", "timeEnd", "trace"]
+    },
+    "quotemark": [true, "single", "avoid-escape"],
+    "array-type": [true, "array"],
+    "arrow-parens": [true, "ban-single-arg-parens"],
+    "interface-over-type-literal": false,
+    "interface-name": false,
+    "no-shadowed-variable": false,
+    "no-var-requires": false,
+    "object-literal-key-quotes": false,
+    "no-consecutive-blank-lines": true,
+    "semicolon": [true, "always"]
+  },
+  "jsRules": {
+    "no-console": [true, "log"],
+    "indent": [true, "spaces", 2],
+    "quotemark": [true, "single", "avoid-escape"]
+  },
+  "linterOptions": {
+    "exclude": []
+  }
+}
