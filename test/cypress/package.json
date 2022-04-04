@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "open": "cypress open",
-    "test": "cypress run --spec \"** / *. spec.ts\""
+    "test": "cypress run"
   },
   "author": "",
   "license": "ISC",
