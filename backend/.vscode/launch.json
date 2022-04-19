@@ -5,24 +5,20 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Backend (yarn dev)",
+      "name": "Launch yarn dev",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/backend",
+      "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "dev"
-      ]
+      "runtimeArgs": ["dev"]
     },
     {
-      "name": "Launch Backend (yarn execute)",
+      "name": "Launch yarn execute",
       "type": "node",
       "request": "launch",
-      "cwd": "${workspaceFolder}/backend",
+      "cwd": "${workspaceFolder}",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": [
-        "execute"
-      ]
+      "runtimeArgs": ["execute"]
     }
   ]
 }
