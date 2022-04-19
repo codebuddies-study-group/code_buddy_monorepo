@@ -1,17 +1,6 @@
-#head{
-    display: grid;
-    grid-template-columns: minmax(100px, 1fr) 2fr 1fr 1fr;
-    padding: 10px;
+#head {
+    background: transparent;
 }
-
-#head * {
-	text-align: center;
-}
-
-#head .header-options {
-    display: flex;
-    list-style: none;
-    padding: none;
-    justify-content: space-between;
-    align-items: stretch;
+#menu-appbar ul {
+    background: #173861;
 }
