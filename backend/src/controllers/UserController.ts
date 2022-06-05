@@ -6,6 +6,9 @@ import Language from "../models/Language";
 import Meeting from "../models/Meeting";
 import User from "../models/User";
 import UserLanguage from "../models/UserLanguage";
+import { sendKafkaMessages, readFromKafkaTopic } from "../../helpers/kafka";
+import { v4 as uuidv4 } from "uuid";
+import { Message } from "kafkajs";
 
 /**
  * create items
@@ -13,16 +16,16 @@ import UserLanguage from "../models/UserLanguage";
  * @param {Response} res
  */
 export async function create(req: Request, res: Response) {
-  const { name, email, password } = req.body;
+    const { name, email, password } = req.body;
 
-  User.create({ name, email, password })
-    .then((user: User) => {
-      return res.status(201).json(user);
-    })
-    .catch((reason) => {
-      console.error(reason);
-      return res.status(500).json(reason);
-    });
+    User.create({ name, email, password })
+        .then((user: User) => {
+            return res.status(201).json(user);
+        })
+        .catch((reason) => {
+            console.error(reason);
+            return res.status(500).json(reason);
+        });
 }
 
 /**
@@ -31,21 +34,21 @@ export async function create(req: Request, res: Response) {
  * @param {Response} res
  */
 export async function show(req: Request, res: Response) {
-  const userId = req.params.id;
+    const userId = req.params.id;
 
-  try {
-    const new_user = await User.findOne({
-      include: [Meeting, Language],
-      where: {
-        id: userId,
-      },
-    });
-    console.log({ new_user });
+    try {
+        const new_user = await User.findOne({
+            include: [Meeting, Language],
+            where: {
+                id: userId,
+            },
+        });
+        console.log({ new_user });
 
-    return res.status(200).json(new_user);
-  } catch (error) {
-    console.error(error);
-  }
+        return res.status(200).json(new_user);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 /**
@@ -55,43 +58,62 @@ export async function show(req: Request, res: Response) {
  * @returns
  */
 export async function search(req: Request, res: Response) {
-  const { name, language } = req.query;
+    const { name, language } = req.query;
 
-  // if the user sent a language, we will query by it
-  const languageQuery = language
-    ? {
-        name: {
-          [Op.like]: `%${language}%`,
-        },
-      }
-    : {};
+    const requestId = uuidv4();
 
-  // if the user sent a name, we will query by it
-  const nameQuery = name
-    ? {
-        name: {
-          [Op.like]: `%${name}%`,
-        },
-      }
-    : {};
+    const kafkaMessages: Message[] = [];
 
-  try {
-    const new_user = await User.findAll({
-      include: [
-        { model: Meeting },
-        {
-          model: Language,
-          where: languageQuery,
-        },
-      ],
-      where: nameQuery,
+    [name, language].map((searchParam) => {
+        searchParam &&
+            kafkaMessages.push({
+                value: String(searchParam),
+                key: Object.keys({ searchParam })[0],
+                headers: {
+                    requestId,
+                },
+            });
     });
-    console.log({ new_user });
 
-    return res.status(200).json(new_user);
-  } catch (error) {
-    console.error(error);
-  }
+    kafkaMessages && sendKafkaMessages("userSearches", kafkaMessages);
+
+    // if the user sent a language, we will query by it
+    const languageQuery = language
+        ? {
+              name: {
+                  [Op.like]: `%${language}%`,
+              },
+          }
+        : {};
+
+    // if the user sent a name, we will query by it
+    const nameQuery = name
+        ? {
+              name: {
+                  [Op.like]: `%${name}%`,
+              },
+          }
+        : {};
+
+    readFromKafkaTopic("userSearches");
+
+    try {
+        const new_user = await User.findAll({
+            include: [
+                { model: Meeting },
+                {
+                    model: Language,
+                    where: languageQuery,
+                },
+            ],
+            where: nameQuery,
+        });
+        console.log({ new_user });
+
+        return res.status(200).json(new_user);
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export async function edit(req: Request, res: Response) {
